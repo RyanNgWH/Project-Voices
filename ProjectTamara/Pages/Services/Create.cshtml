@@ -5,54 +5,54 @@
     ViewData["Title"] = "Create";
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
+<!--https://pastebin.com/6ruVgQwq-->
+<div class="container-fluid bg-light py-3 h-100">
+    <div class="container">
+        <form id="contact-form" method="post" action="contact.php" role="form">
+            <div class="row">
 
-<h2>Create</h2>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="formTitle">Title *</label>
+                        <input id="formTitle" type="text" name="title" class="form-control" placeholder="Please enter service title *" required="required" data-error="title is required.">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="formTitle">Photo *</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<h4>Service</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Service.Title" class="control-label"></label>
-                <input asp-for="Service.Title" class="form-control" />
-                <span asp-validation-for="Service.Title" class="text-danger"></span>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_message">Description *</label>
+                        <textarea id="form_message" name="description" class="form-control" placeholder="Description of session: What do you want done? =)*" rows="4" required="required" data-error="send a message."></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-warning btn-send" value="Send message">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Service.Description" class="control-label"></label>
-                <input asp-for="Service.Description" class="form-control" />
-                <span asp-validation-for="Service.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Service.DateCreated" class="control-label"></label>
-                <input asp-for="Service.DateCreated" class="form-control" />
-                <span asp-validation-for="Service.DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Service.Status" class="control-label"></label>
-                <input asp-for="Service.Status" class="form-control" />
-                <span asp-validation-for="Service.Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Service.Votes" class="control-label"></label>
-                <input asp-for="Service.Votes" class="form-control" />
-                <span asp-validation-for="Service.Votes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Service.Photo" class="control-label"></label>
-                <input asp-for="Service.Photo" class="form-control" />
-                <span asp-validation-for="Service.Photo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                </div>
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
