@@ -14,13 +14,13 @@
         <form id="contact-form" method="post" enctype="multipart/form-data">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="formTitle">Title *</label>
                         <input asp-for="@Model.Service.Title" id="formTitle" type="text" name="title" class="form-control" placeholder="Please enter service title *" required="required" data-error="title is required.">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="formPhoto">Photo *</label>
                         <div class="custom-file">

@@ -27,7 +27,12 @@ body, html {
 .color-pink {
     color: #ef1e63;
 }
-
+.color-primary {
+    color: #007bff;
+}
+.color-success {
+    color: #28a745;
+}
 /*Effects */
 
 /*Bootstrap overrides*/
@@ -35,3 +40,7 @@ body, html {
     font-size: 2.0rem !important;
 }
 /*File stuff*/
+.img-small{
+    width:40px;
+    height:40px;
+}
