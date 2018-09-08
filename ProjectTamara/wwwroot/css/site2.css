@@ -1,14 +1,23 @@
 ﻿
+/*Main CSS*/
 body, html {
     height: 100%;
     font-family: "Segoe UI Light","sans-serif";
 }
 
+/*Index styles*/
 .cover {
     max-width: 100%;
     display: flex;
     background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.7)), url(https://i.imgur.com/cJv9b48.jpg) no-repeat center center fixed;
     padding-bottom: 20px;
+}
+
+/*Colors - Buttons and Color*/
+.btn-pink:hover {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
 }
 
 .btn-pink, .btn-pink:active, .btn-pink:visited {
@@ -17,19 +26,34 @@ body, html {
     text-decoration: none;
 }
 
-.btn-pink:hover {
-    background-color: #007bff;
-    color: white;
-    text-decoration:none;
-}
-.opacity-90{
-    opacity:0.9;
-}
 .color-pink {
     color: #ef1e63;
 }
 
+/*Effects */
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    80% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+}
+bounceani:hover {
+    animation: bounce 1s;
+}
+
+
+
 /*Bootstrap overrides*/
-.navbar-brand{
-    font-size:2.0rem !important;
+.navbar-brand {
+    font-size: 2.0rem !important;
 }
