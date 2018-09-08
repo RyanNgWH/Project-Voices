@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/ProjectTamara/Migrations/20180908192026_refresh.cs
+/ProjectTamara/Migrations/20180908192026_refresh.Designer.cs
