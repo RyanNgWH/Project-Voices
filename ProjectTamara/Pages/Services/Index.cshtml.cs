@@ -24,7 +24,7 @@ namespace ProjectTamara.Pages.Services
 
         public async Task OnGetAsync()
         {
-            Service = await _context.Service.ToListAsync();
+            //Service = await _context.Service.Where(p => (p.Status == "Confirmed")).ToListAsync();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model ProjectTamara.Pages.Services.IndexModel
+@model ProjectTamara.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
@@ -10,7 +10,7 @@
                 <h1 class="text-white text-center display-1">
                     Socialize Today.<br>
                     We'll follow your voices.<br />
-                    <a href="About.aspx" class="btn-lg btn-pink">Donate now <i class="fas fa-heart"></i></a>
+                    <a href="~/Services" class="btn-lg btn-pink">Vote now <i class="fas fa-heart"></i></a>
                 </h1>
 
             </div>
@@ -18,48 +18,41 @@
         </div>
     </div>
 </div>
-<div class="bg-secondary pt-5 px-5">
-    <div class="container-fluid">
-        <h1 class="display-3 text-center text-white">Top services</h1>
-        <p class="text-center text-white pb-1 display-6">Here are some of our top services voted by the community!</p>
-        <div class="row">
-            <div class="col-md-4 py-2">
-                <div class="card">
-                    <img class="card-img-top img-frontpage" src="~/images/service-images/@Model.Service[0].Photo" alt="Service Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Service[0].Title</h5>
-                        <p class="card-text">@Model.Service[0].Description</p>
-                        <a asp-page="Pages/Services/Details" class="btn btn-primary">Find out more!</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 py-2">
-                <div class="card">
-                    <img class="card-img-top img-frontpage" src="~/images/service-images/@Model.Service[1].Photo" alt="Service Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Service[1].Title</h5>
-                        <p class="card-text">@Model.Service[1].Description</p>
-                        <a asp-page="Pages/Services/Details" class="btn btn-primary">Find out more!</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 py-2">
-                <div class="card">
-                    <img class="card-img-top img-frontpage" src="~/images/service-images/@Model.Service[2].Photo" alt="Service Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Service[2].Title</h5>
-                        <p class="card-text">@Model.Service[2].Description</p>
-                        <a asp-page="Pages/Services/Details" class="btn btn-primary">Find out more!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-secondary text-white">
-        <hr class="border-white" />
-        <footer class="p-4 text-center">
-            <span>&copy; 2018 - Project Tamara <i class="fas fa-heart color-pink"></i> </span>
-        </footer>
-    </div>
 
+<div class="bg-secondary pt-5 px-5">
+    @if (Model.Service.Count != 0)
+    {
+        <div class="container-fluid">
+            <h1 class="display-3 text-center text-white">Confirmed Services</h1>
+            <p class="text-center text-white pb-1 display-6">Here are some of our confirmed events suggested by the community!</p>
+            @for (int i = 1; i < (Math.Ceiling(Model.Service.Count / 3.0)) + 1; i++)
+            {
+                <div class="row">
+                    @for (int x = 1; x < 4; x++)
+                    {
+                        if ((i * x) <= Model.Service.Count)
+                        {
+                            <div class="col-md-4 py-2">
+                                <div class="card">
+                                    <img class="card-img-top img-frontpage" src="~/images/service-images/@Model.Service[(i*x) - 1].Photo" alt="Service Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Service[(i * x) - 1].Title</h5>
+                                        <p class="card-text">@Model.Service[(i * x) - 1].Description</p>
+                                        <a asp-page="Pages/Services/Details" class="btn btn-primary">Find out more!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    }
+
+</div>
+<div class="container-fluid bg-secondary text-white">
+    <hr class="border-white" />
+    <footer class="p-4 text-center">
+        <span>&copy; 2018 - Project Tamara <i class="fas fa-heart color-pink"></i> </span>
+    </footer>
 </div>
