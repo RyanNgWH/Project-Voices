@@ -4,12 +4,6 @@ body, html {
     height: 100%;
     font-family: "Segoe UI Light","sans-serif";
 }
-
-.main-content{
-    padding-top: 50px;
-    padding-left: 100px;
-}
-
 .cover {
     max-width: 100%;
     display: flex;
@@ -35,33 +29,9 @@ body, html {
 }
 
 /*Effects */
-@keyframes bounce {
-    0%, 20%, 60%, 100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-
-    40% {
-        -webkit-transform: translateY(-20px);
-        transform: translateY(-20px);
-    }
-
-    80% {
-        -webkit-transform: translateY(-10px);
-        transform: translateY(-10px);
-    }
-}
-bounceani:hover {
-    animation: bounce 1s;
-}
-
-
 
 /*Bootstrap overrides*/
 .navbar-brand {
     font-size: 2.0rem !important;
 }
 
-.page-title{
-    margin-bottom: 50px;
-}
