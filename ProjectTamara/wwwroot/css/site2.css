@@ -1,0 +1,35 @@
+﻿
+body, html {
+    height: 100%;
+    font-family: "Segoe UI Light","sans-serif";
+}
+
+.cover {
+    max-width: 100%;
+    display: flex;
+    background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.7)), url(https://i.imgur.com/cJv9b48.jpg) no-repeat center center fixed;
+    padding-bottom: 20px;
+}
+
+.btn-pink, .btn-pink:active, .btn-pink:visited {
+    background-color: #ef1e63;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-pink:hover {
+    background-color: #007bff;
+    color: white;
+    text-decoration:none;
+}
+.opacity-90{
+    opacity:0.9;
+}
+.color-pink {
+    color: #ef1e63;
+}
+
+/*Bootstrap overrides*/
+.navbar-brand{
+    font-size:2.0rem !important;
+}
