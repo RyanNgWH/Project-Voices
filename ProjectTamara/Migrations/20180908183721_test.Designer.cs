@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectTamara.Models;
 
 namespace ProjectTamara.Migrations
 {
     [DbContext(typeof(ProjectTamaraContext))]
-    partial class ProjectTamaraContextModelSnapshot : ModelSnapshot
+    [Migration("20180908183721_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,41 +216,6 @@ namespace ProjectTamara.Migrations
                     b.HasKey("BeneficiaryCodesId");
 
                     b.ToTable("BeneficiaryCodes");
-                });
-
-            modelBuilder.Entity("ProjectTamara.Data.Company", b =>
-                {
-                    b.Property<string>("CompanyId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CompanyLogo");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired();
-
-                    b.HasKey("CompanyId");
-
-                    b.ToTable("Company");
-                });
-
-            modelBuilder.Entity("ProjectTamara.Data.GeneralUser", b =>
-                {
-                    b.Property<string>("GeneralUserId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Age");
-
-                    b.Property<string>("FullName")
-                        .IsRequired();
-
-                    b.Property<int>("Income");
-
-                    b.Property<string>("Occupation")
-                        .IsRequired();
-
-                    b.HasKey("GeneralUserId");
-
-                    b.ToTable("GeneralUser");
                 });
 
             modelBuilder.Entity("ProjectTamara.Data.Service", b =>

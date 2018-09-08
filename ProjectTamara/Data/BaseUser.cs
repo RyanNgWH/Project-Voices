@@ -9,5 +9,6 @@ namespace ProjectTamara.Data
     public class BaseUser : IdentityUser
     {
         public string Role { get; set; }
+        public string Icon { get; set; }
     }
 }

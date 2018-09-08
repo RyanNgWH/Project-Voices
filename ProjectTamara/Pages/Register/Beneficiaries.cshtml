@@ -1,0 +1,70 @@
+﻿@page
+@model BeneficiariesModel
+@{
+}
+
+<h2>Register as a Beneficiary</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InputBeneficiary.BeneficiaryId"></label>
+                <input id="beneficiary_code" asp-for="InputBeneficiary.BeneficiaryId" class="form-control" />
+                <span asp-validation-for="InputBeneficiary.BeneficiaryId" class="text-danger"></span>
+                <img id="image_icon" src="" height="60" width="60" style="visibility: hidden;"/>
+            </div>
+            <div class="form-group" style="clear: both;">
+                <label asp-for="InputBeneficiary.FirstName"></label>
+                <input asp-for="InputBeneficiary.FirstName" class="form-control" />
+                <span asp-validation-for="InputBeneficiary.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InputBeneficiary.LastName"></label>
+                <input asp-for="InputBeneficiary.LastName" class="form-control" />
+                <span asp-validation-for="InputBeneficiary.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InputBeneficiary.EmailAddress"></label>
+                <input asp-for="InputBeneficiary.EmailAddress" class="form-control" />
+                <span asp-validation-for="InputBeneficiary.EmailAddress" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Register</button>
+            <input id="input_icon" asp-for="icon" type="hidden" />
+        </form>
+    </div>
+</div>
+
+<script defer>
+    var bc_input = document.getElementById("beneficiary_code");
+    var image_icon = document.getElementById("image_icon");
+    var input_icon = document.getElementById("input_icon");
+    bc_input.addEventListener("change", function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                image_icon.style.visibility = "initial";
+                if (JSON.parse(this.responseText) == "null") {
+                    image_icon.src = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/icons/error.png";
+                    input_icon.value = "error.png";
+                }
+                else {
+                    image_icon.src = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/icons/" + JSON.parse(JSON.parse(this.responseText))["OrganizationImage"];
+                    input_icon.value = JSON.parse(JSON.parse(this.responseText))["OrganizationImage"];
+                }
+            }
+        };
+        xhttp.open("GET", "https://localhost:44346/Register/VerifyCode?code=" + bc_input.value, true);
+        xhttp.send();
+    });
+</script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

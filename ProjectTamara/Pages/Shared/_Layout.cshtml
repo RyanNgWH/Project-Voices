@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using ProjectTamara.Data;
+@using ProjectTamara.Models;
+@inject UserManager<BaseUser> _userManager
+@inject ProjectTamaraContext _context
+@{
+    var currentUser = await _userManager.GetUserAsync(User);
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,35 +38,94 @@
                     <a class="nav-link" href="/Contact">Contact Us</a>
                 </li>
                 @*<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>*@
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>*@
             </ul>
             <a class="navbar-brand display-3" href="/Index">Project Tamara <i class="fas fa-heart color-pink"></i></a>
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                </li>
+            <ul class="nav navbar-nav ml-auto mr-5">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (currentUser.Role == "Beneficiary")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img height="50" width="50" src="~/icons/@currentUser.Icon" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">User ID: @currentUser.UserName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
+                            <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post"></form>
+                        </li>
+                    }
+                    else if (currentUser.Role == "General User")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hello, @_context.GeneralUser.First(u => (u.GeneralUserId == currentUser.UserName)).FullName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
+                            <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post"></form>
+                        </li>
+                    }
+                    else
+                    {
+                        var currentCompany = @_context.Company.First(u => (u.CompanyId == currentUser.UserName));
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hello, @currentCompany.CompanyName</a>
+                        </li>
+                        @if (currentCompany.CompanyLogo != "")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><img height="50" width="50" src="~/icons/@currentCompany.CompanyLogo" /></a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
+                            <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post"></form>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Register
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-page="/Register/Beneficiaries">Register as a Beneficiary</a>
+                            <a class="dropdown-item" asp-page="/Register/General">Register as a General User</a>
+                            <a class="dropdown-item" asp-page="/Register/Company">Register as Company</a>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-page="/Login/Beneficiaries">Login as a Beneficiary</a>
+                            <a class="dropdown-item" asp-page="/Login/General">Login as a General User</a>
+                            <a class="dropdown-item" asp-page="/Login/Company">Login as Company</a>
+                        </div>
+                    </div>
+                }
                 <!--Logout part-->
                 @*<li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>*@
+            <a class="nav-link" href="#">Login</a>
+        </li>*@
             </ul>
 
         </div>
     </nav>
-
-    <partial name="_CookieConsentPartial" />
     <!--source start-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
