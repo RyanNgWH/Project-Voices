@@ -1,0 +1,83 @@
+﻿@page
+@model ProjectTamara.Pages.Services.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>Service</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.DateCreated)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.DateCreated)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.Status)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Votes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.Votes)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Photo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Service.Photo)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Service.ServiceId">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>*@
+<div class="container-fluid bg-secondary py-3 h-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-2">
+                <!--Picture-->
+                <img src="https://i.imgur.com/2eIq9.jpg" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="col-md-4 text-left text-white">
+                <!--Service information -->
+                <h2 class="text-center text-white pb-2">Project name</h2>
+                <div class="container py-4">
+                    <img src="~/images/1.png" class="img-small m-2" /><span>Project name </span><br />
+                    <img src="~/images/2.png" class="img-small m-2" /><span>No of Votes </span><br />
+                    <img src="~/images/3.png" class="img-small m-2" /><span>Project status </span><br />
+                </div>
+                <a class="btn btn-primary btn-block mt-5 p-2">Vote</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 text-white">
+                <!--next section description?-->
+                <h4>Description</h4>
+                <p class="text-justify">Lorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skills. Lorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skills Lorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skillsLorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skillsLorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skillsLorem Ipsum my name is daniel and i am a entrepreneur that will succed in the future with psyopathic skills</p>
+            </div>
+        </div>
+    </div>
+</div>

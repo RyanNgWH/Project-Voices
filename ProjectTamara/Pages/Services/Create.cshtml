@@ -1,0 +1,60 @@
+﻿@page
+@model ProjectTamara.Pages.Services.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+<!--https://pastebin.com/6ruVgQwq-->
+<div class="container-fluid bg-light py-3 h-100">
+    <h3 class="text-center mb-2">Create a service!</h3>
+    <p class="text-muted text-center"><strong>*</strong> These fields are required.</p>
+
+    <div class="container w-75">
+        <form id="contact-form" method="post" enctype="multipart/form-data">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="formTitle">Title *</label>
+                        <input asp-for="@Model.Service.Title" id="formTitle" type="text" name="title" class="form-control" placeholder="Please enter service title *" required="required" data-error="title is required.">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="formPhoto">Photo *</label>
+                        <div class="custom-file">
+                            <input asp-for="@Model.ServiceImage" id="logo" type="file" class="custom-file-input">
+                            <label for="logo" class="custom-file-label text-truncate">Choose file...</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_message">Description *</label>
+                        <textarea asp-for="@Model.Service.Description" id="form_message" name="description" class="form-control" placeholder="Description of session: What do you want done? =)*" rows="4" required="required" data-error="send a message."></textarea>
+                    </div>
+                </div>
+                <div class="mx-auto">
+                    <input type="submit" class="btn btn-warning btn-send" value="Submit Service">
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <script>
+        $('.custom-file-input').on('change', function () {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    </script>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

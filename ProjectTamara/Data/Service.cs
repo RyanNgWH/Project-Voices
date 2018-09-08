@@ -14,5 +14,6 @@ namespace ProjectTamara.Data
         public string Status { get; set; }
         public int Votes { get; set; }
         public string Photo { get; set; }
+        public string Location { get; set; }
     }
 }

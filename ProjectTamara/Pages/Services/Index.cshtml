@@ -1,0 +1,67 @@
+﻿@page
+@model ProjectTamara.Pages.Services.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Votes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service[0].Photo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Service) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Votes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ServiceId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ServiceId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ServiceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

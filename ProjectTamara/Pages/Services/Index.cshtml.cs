@@ -8,28 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using ProjectTamara.Data;
 using ProjectTamara.Models;
 
-namespace ProjectTamara.Pages
+namespace ProjectTamara.Pages.Services
 {
     public class IndexModel : PageModel
     {
         private readonly ProjectTamara.Models.ProjectTamaraContext _context;
-        public IList<Service> Service { get; set; }
 
         public IndexModel(ProjectTamara.Models.ProjectTamaraContext context)
         {
             _context = context;
         }
-        public void OnGet()
-        {
 
-        }
-        public async Task OnGetAsync(string listingCategory, string searchString)
-        {
-            var services = from s in _context.Service
-                           select s;
-            services = services.OrderByDescending(t => t.Votes);
+        public IList<Service> Service { get;set; }
 
-            Service = await services.ToListAsync();
+        public async Task OnGetAsync()
+        {
+            Service = await _context.Service.ToListAsync();
         }
     }
 }
