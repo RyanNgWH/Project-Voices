@@ -41,7 +41,7 @@ namespace ProjectTamara.Pages.Services
 
             //Upload Photo
             var filename = Guid.NewGuid().ToString() + Path.GetExtension(ServiceImage.FileName);
-            var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "",  filename);
+            var file = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "service-images",  filename);
             using (var fileStream = new FileStream(file, FileMode.Create))
             {
                 await ServiceImage.CopyToAsync(fileStream);

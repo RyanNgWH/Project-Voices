@@ -10,6 +10,9 @@ body, html {
     background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.7)), url(https://i.imgur.com/cJv9b48.jpg) no-repeat center center fixed;
     padding-bottom: 20px;
 }
+.img-frontpage{
+    height: 400px;
+}
 
 /*Colors - Buttons and Color*/
 .btn-pink:hover {
