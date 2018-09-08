@@ -7,6 +7,9 @@
 }
 <!--https://pastebin.com/6ruVgQwq-->
 <div class="container-fluid bg-light py-3 h-100">
+    <h3 class="text-center mb-2">Create a service!</h3>
+    <p class="text-muted text-center"><strong>*</strong> These fields are required.</p>
+
     <div class="container w-75">
         <form id="contact-form" method="post" action="contact.php" role="form">
             <div class="row">
@@ -19,15 +22,10 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="formTitle">Photo *</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                                <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
-                            </div>
+                        <label for="formPhoto">Photo *</label>
+                        <div class="custom-file">
+                            <input id="logo" type="file" class="custom-file-input">
+                            <label for="logo" class="custom-file-label text-truncate">Choose file...</label>
                         </div>
                     </div>
                 </div>
@@ -42,18 +40,19 @@
                     </div>
                 </div>
                 <div class="mx-auto">
-                    <input type="submit" class="btn btn-warning btn-send" value="Send message">
+                    <input type="submit" class="btn btn-warning btn-send" value="Submit Service">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="text-muted"><strong>*</strong> These fields are required.</p>
-                </div>
-            </div>
+
         </form>
     </div>
-
+    <script>
+        $('.custom-file-input').on('change', function () {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    </script>
 </div>
 
 @section Scripts {
