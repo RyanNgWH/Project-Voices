@@ -6,12 +6,13 @@
     <title>@ViewData["Title"] - ProjectTamara</title>
     <!--CSS-->
     @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link rel="stylesheet" href="~/css/site2.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--CSS END-->
 </head>
-<body class="h-100 bg-secondary">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Project Tamara</a>
+<body class="">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,10 +24,10 @@
                     <span class="sr-only">(current)</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/About">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="/Contact">Contact Us</a>
                 </li>
                 @*<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,6 +41,7 @@
                 </div>
             </li>*@
             </ul>
+            <a class="navbar-brand display-3" href="#">Project Tamara <i class="fas fa-heart color-pink"></i></a>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Login</a>
@@ -49,8 +51,8 @@
                 </li>
                 <!--Logout part-->
                 @*<li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>*@
+                <a class="nav-link" href="#">Login</a>
+            </li>*@
             </ul>
 
         </div>
@@ -63,11 +65,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!--source end-->
-    <div class="container text-white">
+    <div class="h-100">
         @RenderBody()
-        <hr />
+    </div>
+    <div class="container text-white">
+        <hr class="border-white" />
         <footer>
-            <p>&copy; 2018 - ProjectTamara (Jing Jie, Ryan, Brian, Jack </p>
+            <p>&copy; 2018 - ProjectTamara (Jing Jie, Ryan, Brian, Jiet, Dave)</p>
         </footer>
     </div>
 
