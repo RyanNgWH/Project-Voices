@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectTamara.Migrations
 {
-    public partial class Refresh : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,11 +40,68 @@ namespace ProjectTamara.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Role = table.Column<string>(nullable: true),
+                    Icon = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Beneficiary",
+                columns: table => new
+                {
+                    BeneficiaryId = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    EmailAddress = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beneficiary", x => x.BeneficiaryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BeneficiaryCodes",
+                columns: table => new
+                {
+                    BeneficiaryCodesId = table.Column<string>(nullable: false),
+                    OrganizationImage = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BeneficiaryCodes", x => x.BeneficiaryCodesId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Company",
+                columns: table => new
+                {
+                    CompanyId = table.Column<string>(nullable: false),
+                    CompanyName = table.Column<string>(nullable: false),
+                    CompanyLogo = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Company", x => x.CompanyId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GeneralUser",
+                columns: table => new
+                {
+                    GeneralUserId = table.Column<string>(nullable: false),
+                    Occupation = table.Column<string>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    Income = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeneralUser", x => x.GeneralUserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,6 +285,18 @@ namespace ProjectTamara.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Beneficiary");
+
+            migrationBuilder.DropTable(
+                name: "BeneficiaryCodes");
+
+            migrationBuilder.DropTable(
+                name: "Company");
+
+            migrationBuilder.DropTable(
+                name: "GeneralUser");
 
             migrationBuilder.DropTable(
                 name: "Service");

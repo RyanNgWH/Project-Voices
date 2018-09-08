@@ -10,8 +10,8 @@ using ProjectTamara.Models;
 namespace ProjectTamara.Migrations
 {
     [DbContext(typeof(ProjectTamaraContext))]
-    [Migration("20180908183721_test")]
-    partial class test
+    [Migration("20180908211615_n")]
+    partial class n
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,15 +218,54 @@ namespace ProjectTamara.Migrations
                     b.ToTable("BeneficiaryCodes");
                 });
 
+            modelBuilder.Entity("ProjectTamara.Data.Company", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyLogo");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
+
+                    b.HasKey("CompanyId");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.GeneralUser", b =>
+                {
+                    b.Property<string>("GeneralUserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
+
+                    b.Property<int>("Income");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired();
+
+                    b.HasKey("GeneralUserId");
+
+                    b.ToTable("GeneralUser");
+                });
+
             modelBuilder.Entity("ProjectTamara.Data.Service", b =>
                 {
                     b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedById");
+
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Location");
 
                     b.Property<string>("Photo");
 
@@ -237,6 +276,8 @@ namespace ProjectTamara.Migrations
                     b.Property<int>("Votes");
 
                     b.HasKey("ServiceId");
+
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("Service");
                 });
@@ -297,6 +338,13 @@ namespace ProjectTamara.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.Service", b =>
+                {
+                    b.HasOne("ProjectTamara.Data.BaseUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
                 });
 #pragma warning restore 612, 618
         }

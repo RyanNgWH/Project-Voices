@@ -10,8 +10,8 @@ using ProjectTamara.Models;
 namespace ProjectTamara.Migrations
 {
     [DbContext(typeof(ProjectTamaraContext))]
-    [Migration("20180908193214_GeneralUser")]
-    partial class GeneralUser
+    [Migration("20180908211112_newAttr")]
+    partial class newAttr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,12 +218,30 @@ namespace ProjectTamara.Migrations
                     b.ToTable("BeneficiaryCodes");
                 });
 
+            modelBuilder.Entity("ProjectTamara.Data.Company", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyLogo");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
+
+                    b.HasKey("CompanyId");
+
+                    b.ToTable("Company");
+                });
+
             modelBuilder.Entity("ProjectTamara.Data.GeneralUser", b =>
                 {
                     b.Property<string>("GeneralUserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
 
                     b.Property<int>("Income");
 
@@ -241,9 +259,13 @@ namespace ProjectTamara.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedByBeneficiaryId");
+
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Location");
 
                     b.Property<string>("Photo");
 
@@ -254,6 +276,8 @@ namespace ProjectTamara.Migrations
                     b.Property<int>("Votes");
 
                     b.HasKey("ServiceId");
+
+                    b.HasIndex("CreatedByBeneficiaryId");
 
                     b.ToTable("Service");
                 });
@@ -314,6 +338,13 @@ namespace ProjectTamara.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.Service", b =>
+                {
+                    b.HasOne("ProjectTamara.Data.Beneficiary", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedByBeneficiaryId");
                 });
 #pragma warning restore 612, 618
         }

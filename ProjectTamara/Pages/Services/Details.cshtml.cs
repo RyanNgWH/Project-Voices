@@ -20,6 +20,7 @@ namespace ProjectTamara.Pages.Services
         }
 
         public Service Service { get; set; }
+        public Beneficiary CreatedBy { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,6 +30,7 @@ namespace ProjectTamara.Pages.Services
             }
 
             Service = await _context.Service.FirstOrDefaultAsync(m => m.ServiceId == id);
+            CreatedBy = await _context.Beneficiary.FirstOrDefaultAsync(q => (q.BeneficiaryId == Service.CreatedBy.UserName));
 
             if (Service == null)
             {

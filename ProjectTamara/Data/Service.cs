@@ -15,5 +15,6 @@ namespace ProjectTamara.Data
         public int Votes { get; set; }
         public string Photo { get; set; }
         public string Location { get; set; }
+        public virtual BaseUser CreatedBy { get; set; }
     }
 }

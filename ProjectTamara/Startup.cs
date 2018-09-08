@@ -44,14 +44,18 @@ namespace ProjectTamara
         options.UseLazyLoadingProxies()
         .UseSqlServer(
         Configuration.GetConnectionString("ProjectTamaraContextConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.ConfigureApplicationCookie(options =>
+            services.AddMvc().AddRazorPagesOptions(options =>
             {
-                options.LoginPath = "/Identity/Account/Login";
-            });
+                options.Conventions.AuthorizeFolder("/Services");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Index";
+                options.Cookie = new CookieBuilder() { SecurePolicy = CookieSecurePolicy.Always, Expiration = TimeSpan.FromHours(1), HttpOnly = true };
             });
         }
 
