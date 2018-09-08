@@ -1,0 +1,59 @@
+﻿@page
+@model ProjectTamara.Pages.Services.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Service</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Votes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.Votes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Service.Photo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Service.Photo)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Service.ServiceId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

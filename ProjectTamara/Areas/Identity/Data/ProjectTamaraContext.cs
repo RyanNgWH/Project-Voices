@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProjectTamara.Data;
 
 namespace ProjectTamara.Models
 {
@@ -22,5 +23,7 @@ namespace ProjectTamara.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<ProjectTamara.Data.Service> Service { get; set; }
     }
 }
