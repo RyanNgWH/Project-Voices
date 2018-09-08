@@ -15,12 +15,6 @@ namespace ProjectTamara.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<ProjectTamaraContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("ProjectTamaraContextConnection")));
-
-                services.AddDefaultIdentity<IdentityUser>()
-                    .AddEntityFrameworkStores<ProjectTamaraContext>();
             });
         }
     }
