@@ -5,7 +5,11 @@ body, html {
     font-family: "Segoe UI Light","sans-serif";
 }
 
-/*Index styles*/
+.main-content{
+    padding-top: 50px;
+    padding-left: 100px;
+}
+
 .cover {
     max-width: 100%;
     display: flex;
@@ -56,4 +60,8 @@ bounceani:hover {
 /*Bootstrap overrides*/
 .navbar-brand {
     font-size: 2.0rem !important;
+}
+
+.page-title{
+    margin-bottom: 50px;
 }
