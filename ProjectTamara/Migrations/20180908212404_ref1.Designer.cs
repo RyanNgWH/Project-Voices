@@ -10,8 +10,8 @@ using ProjectTamara.Models;
 namespace ProjectTamara.Migrations
 {
     [DbContext(typeof(ProjectTamaraContext))]
-    [Migration("20180908183721_test")]
-    partial class test
+    [Migration("20180908212404_ref1")]
+    partial class ref1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,6 +218,41 @@ namespace ProjectTamara.Migrations
                     b.ToTable("BeneficiaryCodes");
                 });
 
+            modelBuilder.Entity("ProjectTamara.Data.Company", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyLogo");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
+
+                    b.HasKey("CompanyId");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.GeneralUser", b =>
+                {
+                    b.Property<string>("GeneralUserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
+
+                    b.Property<int>("Income");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired();
+
+                    b.HasKey("GeneralUserId");
+
+                    b.ToTable("GeneralUser");
+                });
+
             modelBuilder.Entity("ProjectTamara.Data.Service", b =>
                 {
                     b.Property<int>("ServiceId")
@@ -227,6 +262,8 @@ namespace ProjectTamara.Migrations
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Location");
 
                     b.Property<string>("Photo");
 

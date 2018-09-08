@@ -6,62 +6,80 @@
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Confirmed</h2>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].DateCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].Votes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service[0].Photo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Service) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Votes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Photo)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ServiceId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ServiceId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ServiceId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid py-3 bg-secondary">
+    <div class="container">
+        <div class="title h1 text-center text-white">Approved services</div>
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <h4 class="card-title">Service Alpha</h4>
+                        <span><img class="img-small" src="~/images/boy.png" />Made by user id 12351473</span>
+                        <p class="card-text mt-2">
+                            This event calls for everyone to attend a mass tuiton for mathemathics! We would love to host anyone from 12-16 years old!
+                        </p>
+                        <p class="card-text">
+
+                        </p>
+                        <div class="pt-3">
+                            <a href="#" class="mt-auto btn btn-primary">Donate to us</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-viewall" src="https://picsum.photos/450/300?image=1072" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--two-->
+    <div class="container">
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <h4 class="card-title">Service Alpha</h4>
+                        <span><img class="img-small" src="~/images/boy.png" />Made by user x</span>
+                        <p class="card-text mt-2">
+                            The Carousel code can be replaced with an img src, no problem. The added CSS brings shadow to the card and some adjustments to the prev/next buttons and the indicators is rounded now. As in Bootstrap 3
+                        </p>
+                        <p class="card-text">Made for usage, commonly searched for. Fork, like and use it. Just move the carousel div above the col containing the text for left alignment of images</p>
+                        <div class="pt-3">
+                            <a href="#" class="mt-auto btn btn-primary">Read More</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-viewall" src="https://picsum.photos/450/300?image=1072" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--three-->
+    <div class="container">
+        <div class="card">
+            <div class="row ">
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <h4 class="card-title">Service Alpha</h4>
+                        <span><img class="img-small" src="~/images/boy.png" />Made by user x</span>
+                        <p class="card-text mt-2">
+                            This event calls for everyone to attend a mass tuiton for mathemathics! We would love to host anyone from 12-16 years old!
+                        </p>
+                        <p class="card-text">Made for usage, commonly searched for. Fork, like and use it. Just move the carousel div above the col containing the text for left alignment of images</p>
+                        <div class="pt-3">
+                            <a href="#" class="mt-auto btn btn-primary">Read More</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-viewall" src="https://picsum.photos/450/300?image=1072" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -73,6 +73,9 @@ namespace ProjectTamara.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -112,6 +115,8 @@ namespace ProjectTamara.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -180,6 +185,72 @@ namespace ProjectTamara.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectTamara.Data.Beneficiary", b =>
+                {
+                    b.Property<string>("BeneficiaryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.HasKey("BeneficiaryId");
+
+                    b.ToTable("Beneficiary");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.BeneficiaryCodes", b =>
+                {
+                    b.Property<string>("BeneficiaryCodesId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("OrganizationImage");
+
+                    b.HasKey("BeneficiaryCodesId");
+
+                    b.ToTable("BeneficiaryCodes");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.Company", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyLogo");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
+
+                    b.HasKey("CompanyId");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.GeneralUser", b =>
+                {
+                    b.Property<string>("GeneralUserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
+
+                    b.Property<int>("Income");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired();
+
+                    b.HasKey("GeneralUserId");
+
+                    b.ToTable("GeneralUser");
+                });
+
             modelBuilder.Entity("ProjectTamara.Data.Service", b =>
                 {
                     b.Property<int>("ServiceId")
@@ -203,6 +274,19 @@ namespace ProjectTamara.Migrations
                     b.HasKey("ServiceId");
 
                     b.ToTable("Service");
+                });
+
+            modelBuilder.Entity("ProjectTamara.Data.BaseUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Role");
+
+                    b.ToTable("BaseUser");
+
+                    b.HasDiscriminator().HasValue("BaseUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
