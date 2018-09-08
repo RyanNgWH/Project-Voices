@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Pages\Services\" />
   </ItemGroup>
 
 </Project>
