@@ -11,13 +11,13 @@
     <p class="text-muted text-center"><strong>*</strong> These fields are required.</p>
 
     <div class="container w-75">
-        <form id="contact-form" method="post" action="contact.php" role="form">
+        <form id="contact-form" method="post" enctype="multipart/form-data">
             <div class="row">
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="formTitle">Title *</label>
-                        <input id="formTitle" type="text" name="title" class="form-control" placeholder="Please enter service title *" required="required" data-error="title is required.">
+                        <input asp-for="@Model.Service.Title" id="formTitle" type="text" name="title" class="form-control" placeholder="Please enter service title *" required="required" data-error="title is required.">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_message">Description *</label>
-                        <textarea id="form_message" name="description" class="form-control" placeholder="Description of session: What do you want done? =)*" rows="4" required="required" data-error="send a message."></textarea>
+                        <textarea asp-for="@Model.Service.Description" id="form_message" name="description" class="form-control" placeholder="Description of session: What do you want done? =)*" rows="4" required="required" data-error="send a message."></textarea>
                     </div>
                 </div>
                 <div class="mx-auto">
