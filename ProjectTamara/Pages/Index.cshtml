@@ -9,7 +9,8 @@
             <div class="col d-flex justify-content-center align-self-center">
                 <h1 class="text-white text-center display-1">
                     Socialize Today.<br>
-                    We'll follow your voices.<br />
+                    We'll follow your voices <br />
+                    and bring them to life.<br />
                     <a href="~/Services" class="btn-lg btn-pink">Vote now <i class="fas fa-heart"></i></a>
                 </h1>
 
@@ -20,7 +21,7 @@
 </div>
 
 <div class="bg-secondary pt-5 px-5">
-    @if (Model.Service.Count != 0)
+    @if (Model.Service != null && Model.Service.Count != 0)
     {
         <div class="container-fluid">
             <h1 class="display-3 text-center text-white">Confirmed Services</h1>

@@ -31,9 +31,6 @@
                     <a class="nav-link" href="/Index">Home</a>
                     <span class="sr-only">(current)</span>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Services">Services</a>
-                </li>
                 @*<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -46,7 +43,7 @@
                         </div>
                     </li>*@
             </ul>
-            <a class="navbar-brand display-3" href="/Index">Project Tamara <i class="fas fa-heart color-pink"></i></a>
+            <a class="navbar-brand display-3" href="/Index">Project Voices<i class="fas fa-heart color-pink"></i></a>
             <ul class="nav navbar-nav ml-auto mr-5">
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -54,6 +51,9 @@
                     {
                         <li class="nav-item">
                             <a class="nav-link" href="#"><img height="50" width="50" src="~/icons/@currentUser.Icon" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Services/Create">Create a Service</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">User ID: @currentUser.UserName</a>
@@ -78,6 +78,9 @@
                         var currentCompany = @_context.Company.First(u => (u.CompanyId == currentUser.UserName));
                         <li class="nav-item">
                             <a class="nav-link" href="#">Hello, @currentCompany.CompanyName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Services/Proposals">View our proposals</a>
                         </li>
                         @if (currentCompany.CompanyLogo != "")
                         {
