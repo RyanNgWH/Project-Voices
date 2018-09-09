@@ -56,7 +56,7 @@
         <a asp-page="./Edit" asp-route-id="@Model.Service.ServiceId">Edit</a> |
         <a asp-page="./Index">Back to List</a>
     </div>*@
-<div class="container-fluid bg-secondary py-3 h-100">
+<div class="container-fluid bg-secondary py-3 h-100" style="overflow: auto;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mb-2">
@@ -71,7 +71,15 @@
                     <img src="~/images/2.png" class="img-small m-2" /><span>No of Votes @Model.Service.Votes</span><br />
                     <img src="~/images/3.png" class="img-small m-2" /><span>Project status @Model.Service.Status</span><br />
                 </div>
-                <a class="btn btn-primary btn-block mt-5 p-2">Vote</a>
+                @if (Model.hasVoted)
+                {
+                    <a class="btn btn-primary btn-block mt-5 p-2">You have already voted!</a>
+                }
+                else
+                {
+                    <form method="post" asp-page-handler="Vote" id="vote-form" asp-route-ServiceId="@Model.Service.ServiceId"></form>
+                    <a class="btn btn-primary btn-block mt-5 p-2" onclick="document.getElementById('vote-form').submit();">Vote now!</a>
+                }
             </div>
         </div>
         <div class="row">
@@ -80,6 +88,28 @@
                 <h4>Description</h4>
                 <p class="text-justify">@Model.Service.Description</p>
             </div>
+        </div>
+        @using ProjectTamara.Data;
+        @if(Model.Comments.Count > 0)
+        {
+            foreach(Comment c in Model.Comments)
+            {
+                <div style="margin-top: 15px; border: 1px solid black; padding: 5px;">
+                    <p style="color: white;">@c.CommentContent</p>
+                    <span><a href="#">@c.Commenter.FirstName @c.Commenter.LastName</a> @c.DateCommented</span>
+                </div>
+            }
+        }
+        else
+        {
+            <div>There are currently no comments for this service, be the first one to post!</div>
+        }
+        <div style="padding-top: 50px;">
+            <form method="post"  asp-route-ServiceId="@Model.Service.ServiceId">
+                <input class="form-control" placeholder="Add an optional feedback" asp-for="Comment"/>
+                <br />
+                <button class="btn btn-action btn-big btn-full js-sign-button button" type="submit">Submit your feedback</button>
+            </form>
         </div>
     </div>
 </div>

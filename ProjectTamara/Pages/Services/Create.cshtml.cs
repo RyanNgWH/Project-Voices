@@ -30,8 +30,13 @@ namespace ProjectTamara.Pages.Services
             _environment = environment;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if(currentUser.Role != "Beneficiary")
+            {
+                return RedirectToPage("/Index");
+            }
             return Page();
         }
 
@@ -53,7 +58,6 @@ namespace ProjectTamara.Pages.Services
                 await ServiceImage.CopyToAsync(fileStream);
             }
             Service.Photo = filename;
-
             //Default values
             Service.DateCreated = DateTime.Now;
             Service.Status = "Pending";

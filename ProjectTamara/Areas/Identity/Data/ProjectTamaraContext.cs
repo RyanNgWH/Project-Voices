@@ -30,5 +30,7 @@ namespace ProjectTamara.Models
 
         public DbSet<GeneralUser> GeneralUser { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<VoteLog> VoteLog { get; set; }
+        public DbSet<Comment> Comment { get; set; }
     }
 }

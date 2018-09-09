@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectTamara.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ok : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -102,25 +102,6 @@ namespace ProjectTamara.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GeneralUser", x => x.GeneralUserId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Service",
-                columns: table => new
-                {
-                    ServiceId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    Votes = table.Column<int>(nullable: false),
-                    Photo = table.Column<string>(nullable: true),
-                    Location = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Service", x => x.ServiceId);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,6 +210,84 @@ namespace ProjectTamara.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Service",
+                columns: table => new
+                {
+                    ServiceId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    Votes = table.Column<int>(nullable: false),
+                    Photo = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    CreatedById = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Service", x => x.ServiceId);
+                    table.ForeignKey(
+                        name: "FK_Service_AspNetUsers_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    CommentId = table.Column<string>(nullable: false),
+                    CommentContent = table.Column<string>(nullable: true),
+                    DateCommented = table.Column<DateTime>(nullable: false),
+                    CommenterBeneficiaryId = table.Column<string>(nullable: true),
+                    CommentedOnServiceId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comment_Service_CommentedOnServiceId",
+                        column: x => x.CommentedOnServiceId,
+                        principalTable: "Service",
+                        principalColumn: "ServiceId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Beneficiary_CommenterBeneficiaryId",
+                        column: x => x.CommenterBeneficiaryId,
+                        principalTable: "Beneficiary",
+                        principalColumn: "BeneficiaryId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VoteLog",
+                columns: table => new
+                {
+                    VoteLogId = table.Column<string>(nullable: false),
+                    CorrServiceServiceId = table.Column<int>(nullable: true),
+                    BeneficiaryId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VoteLog", x => x.VoteLogId);
+                    table.ForeignKey(
+                        name: "FK_VoteLog_Beneficiary_BeneficiaryId",
+                        column: x => x.BeneficiaryId,
+                        principalTable: "Beneficiary",
+                        principalColumn: "BeneficiaryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VoteLog_Service_CorrServiceServiceId",
+                        column: x => x.CorrServiceServiceId,
+                        principalTable: "Service",
+                        principalColumn: "ServiceId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -267,6 +326,31 @@ namespace ProjectTamara.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_CommentedOnServiceId",
+                table: "Comment",
+                column: "CommentedOnServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_CommenterBeneficiaryId",
+                table: "Comment",
+                column: "CommenterBeneficiaryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Service_CreatedById",
+                table: "Service",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VoteLog_BeneficiaryId",
+                table: "VoteLog",
+                column: "BeneficiaryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VoteLog_CorrServiceServiceId",
+                table: "VoteLog",
+                column: "CorrServiceServiceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -287,10 +371,10 @@ namespace ProjectTamara.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Beneficiary");
+                name: "BeneficiaryCodes");
 
             migrationBuilder.DropTable(
-                name: "BeneficiaryCodes");
+                name: "Comment");
 
             migrationBuilder.DropTable(
                 name: "Company");
@@ -299,10 +383,16 @@ namespace ProjectTamara.Migrations
                 name: "GeneralUser");
 
             migrationBuilder.DropTable(
-                name: "Service");
+                name: "VoteLog");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Beneficiary");
+
+            migrationBuilder.DropTable(
+                name: "Service");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

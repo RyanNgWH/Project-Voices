@@ -1,36 +1,49 @@
 ﻿@page
 @model ProjectTamara.Pages.Services.IndexModel
+@using ProjectTamara.Data
+@using Microsoft.AspNetCore.Identity;
+@using ProjectTamara.Models;
+@inject ProjectTamaraContext _context;
 
 @{
     ViewData["Title"] = "Index";
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
 <div class="container-fluid py-3 bg-secondary">
-<div class="container">
-    <div class="title h1 text-center text-white">All services</div>
-    <div class="card">
-        <div class="row ">
-            <div class="col-md-7 px-3">
-                <div class="card-block px-6">
-                    <h4 class="card-title">Service Alpha</h4>
-                    <span><img class="img-small" src="~/images/boy.png" />Made by user id 12351473</span>
-                    <p class="card-text mt-2">
-                        This event calls for everyone to attend a mass tuiton for mathemathics! We would love to host anyone from 12-16 years old!
-                    </p>
-                    <p class="card-text">
+    <div class="container">
+        <div class="title h1 text-center text-white">All services</div>
+        @foreach (Service s in Model.Service)
+        {
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-7 px-3">
+                        <div class="card-block px-6">
+                            <h4 class="card-title">@s.Title</h4>
+                            @{
+                                BaseUser bu = @s.CreatedBy;
+                                Beneficiary bf = _context.Beneficiary.FirstOrDefault(q => (q.BeneficiaryId == bu.UserName));
+                                BeneficiaryCodes bc = _context.BeneficiaryCodes.FirstOrDefault(q => (q.BeneficiaryCodesId == bf.BeneficiaryId));
+                            }
 
-                    </p>
-                    <div class="pt-3">
-                        <a href="#" class="mt-auto btn btn-primary">Donate to us</a>
+                            <span><img class="img-small" src="~/icons/@bc.OrganizationImage" />Initiated by @bf.FirstName @bf.LastName</span>
+                            <p class="card-text mt-2">
+                                @s.Description
+                            </p>
+                            <p class="card-text">
 
+                            </p>
+                            <div class="pt-3">
+                                <a asp-page="/Services/Details" asp-route-id="@s.ServiceId" class="mt-auto btn btn-primary">Support us!</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="img-viewall" src="~/images/service-images/@s.Photo" alt="" height="300" width="400">
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <img class="img-viewall" src="https://picsum.photos/450/300?image=1072" alt="">
-            </div>
-        </div>
+        }
     </div>
-</div>
 </div>
 

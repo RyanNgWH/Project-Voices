@@ -20,11 +20,12 @@ namespace ProjectTamara.Pages.Services
             _context = context;
         }
 
-        public IList<Service> Service { get;set; }
+        public List<Service> Service { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            //Service = await _context.Service.Where(p => (p.Status == "Confirmed")).ToListAsync();
+            Service = await _context.Service.ToListAsync();
+            return Page();
         }
     }
 }
